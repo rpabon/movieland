@@ -28,7 +28,9 @@
     "start": "vite",
     "build": "tsc && vite build",
     "serve": "vite preview",
-    "test": "vitest run --coverage --watch=false"
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "test:coverage": "vitest --coverage"
   },
   "eslintConfig": {
     "extends": [
