@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { SearchMoviesInput } from "@/components/SearchMoviesInput";
 import "../styles/header.scss";
 
-const Header = ({ getMovies }) => {
+export const Header = ({ getMovies }) => {
   const { starredMovies } = useSelector((state) => state.starred);
 
   const onHomeClick = () => {
@@ -41,5 +41,3 @@ const Header = ({ getMovies }) => {
     </header>
   );
 };
-
-export default Header;

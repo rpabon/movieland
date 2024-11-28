@@ -1,11 +1,19 @@
-import ReactPlayer from 'react-player'
+import React from "react";
+import ReactPlayer from "react-player";
+import { Modal } from "./Modal";
 
-const YoutubePlayer = ({ videoKey }) => (<ReactPlayer 
-  className="video-player" 
-  url={`https://www.youtube.com/watch?v=${videoKey}`} 
-  controls={true}
-  playing={true}
-  data-testid="youtube-player"
-/>);
+export const YoutubePlayer = ({ videoKey, onClose }) => {
+  const url = `https://www.youtube.com/watch?v=${videoKey}`;
 
-export default YoutubePlayer;
+  return (
+    <Modal isOpen={!!videoKey} onClose={onClose}>
+      <ReactPlayer
+        className="video-player"
+        url={url}
+        controls={true}
+        playing={true}
+        data-testid="youtube-player"
+      />
+    </Modal>
+  );
+};
