@@ -1,9 +1,10 @@
-import { Movie } from "./Movie";
-import "../styles/movies.scss";
+import { Movie } from './Movie';
+import styles from '../styles/movies.module.scss';
+import '../styles/movies.scss';
 
 export const Movies = ({ movies }) => {
   return (
-    <div data-testid="movies">
+    <div className={styles.container} data-testid="movies">
       {movies.movies.results?.map((movie) => (
         <Movie movie={movie} key={movie.id} />
       ))}

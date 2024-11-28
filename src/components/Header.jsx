@@ -1,8 +1,8 @@
-import { Link, NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-import { SearchMoviesInput } from "@/components/SearchMoviesInput";
-import "../styles/header.scss";
+import { SearchMoviesInput } from '@/components/SearchMoviesInput';
+import '../styles/header.scss';
 
 export const Header = ({ getMovies }) => {
   const { starredMovies } = useSelector((state) => state.starred);
@@ -18,11 +18,7 @@ export const Header = ({ getMovies }) => {
       </Link>
 
       <nav>
-        <NavLink
-          to="/starred"
-          data-testid="nav-starred"
-          className="nav-starred"
-        >
+        <NavLink to="/starred" data-testid="nav-starred" className="nav-starred">
           {starredMovies.length > 0 ? (
             <>
               <i className="bi bi-star-fill bi-star-fill-white" />

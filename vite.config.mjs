@@ -1,19 +1,23 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react-swc";
-import { resolve } from "path";
+import { defineConfig } from 'vite';
+import { resolve } from 'path';
+import { fileURLToPath } from 'url';
+import react from '@vitejs/plugin-react-swc';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = resolve(__filename, '..');
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "/",
+  base: '/',
   plugins: [react()],
-  root: ".",
+  root: '.',
   build: {
-    outDir: "dist",
+    outDir: 'dist',
     emptyOutDir: true,
   },
   resolve: {
     alias: {
-      "@": resolve(__dirname, "/src"),
+      '@': resolve(__dirname, 'src'),
     },
   },
   server: {
@@ -24,8 +28,13 @@ export default defineConfig({
   },
   test: {
     globals: true,
-    environment: "jsdom",
-    setupFiles: "./jest.setup.js",
+    environment: 'jsdom',
+    setupFiles: './jest.setup.js',
     css: true,
+  },
+  css: {
+    modules: {
+      localsConvention: 'camelCaseOnly',
+    },
   },
 });
