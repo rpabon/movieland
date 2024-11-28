@@ -1,11 +1,10 @@
 import { Link, NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-
+import { useStarredMovies } from '../hooks/useStarredMovies';
 import { SearchMoviesInput } from '@/components/SearchMoviesInput';
 import '../styles/header.scss';
 
 export const Header = ({ getMovies }) => {
-  const { starredMovies } = useSelector((state) => state.starred);
+  const { starredMovies } = useStarredMovies();
 
   const onHomeClick = () => {
     getMovies();

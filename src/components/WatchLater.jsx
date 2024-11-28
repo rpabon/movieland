@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import { Movie } from './Movie';
-import { useWatchLater } from '../hooks/useWatchLater';
+import { useWatchLaterMovies } from '../hooks/useWatchLaterMovies';
 import styles from '../styles/movie-grid.module.scss';
 import '../styles/starred.scss';
 
 export const WatchLater = () => {
-  const { watchLaterMovies, clearWatchLater } = useWatchLater();
+  const { watchLaterMovies, clearWatchLater } = useWatchLaterMovies();
 
   return (
     <div className="starred" data-testid="watch-later-div">

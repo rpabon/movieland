@@ -1,8 +1,8 @@
-import { useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { createSearchParams, useSearchParams } from "react-router-dom";
-import { fetchMovies } from "@/data/moviesSlice";
-import { ENDPOINT_SEARCH, ENDPOINT_DISCOVER } from "@/constants";
+import { useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { createSearchParams, useSearchParams } from 'react-router-dom';
+import { fetchMovies } from '@/data/moviesSlice';
+import { ENDPOINT_SEARCH, ENDPOINT_DISCOVER } from '@/constants';
 
 export const useMovies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -35,7 +35,7 @@ export const useMovies = () => {
   );
 
   const getMoviesFromSearchParams = () => {
-    const query = searchParams.get("search");
+    const query = searchParams.get('search');
     getMovies(query);
   };
 

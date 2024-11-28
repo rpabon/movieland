@@ -1,15 +1,28 @@
-import { useSelector, useDispatch } from 'react-redux';
-import starredSlice from '../data/starredSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import starredSlice from '@/data/starredSlice';
 
 export const useStarredMovies = () => {
-  const starred = useSelector((state) => state.starred);
   const dispatch = useDispatch();
-  const { clearAllStarred } = starredSlice.actions;
+  const starredMovies = useSelector((state) => state.starred.starredMovies);
+  const { starMovie, unstarMovie, clearAllStarred } = starredSlice.actions;
 
-  const clearStarredMovies = () => dispatch(clearAllStarred());
+  const isStarred = (movieId) => {
+    return starredMovies.some(({ id }) => id === movieId);
+  };
+
+  const toggleStar = (movie) => {
+    const action = isStarred(movie.id) ? unstarMovie : starMovie;
+    dispatch(action(movie));
+  };
+
+  const clearStarredMovies = () => {
+    dispatch(clearAllStarred());
+  };
 
   return {
-    starredMovies: starred.starredMovies,
+    starredMovies,
+    isStarred,
+    toggleStar,
     clearStarredMovies,
   };
 };

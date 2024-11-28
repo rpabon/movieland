@@ -10,7 +10,7 @@ export const Modal = ({ isOpen: isOpenProp, onClose, children }) => {
 
   const handleClose = () => {
     setIsOpen(false);
-    onClose();
+    onClose && onClose();
   };
 
   if (!isOpen) return null;
