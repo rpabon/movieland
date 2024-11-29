@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
-import { Movie } from './Movie';
+import { MovieGrid } from './MovieGrid';
 import { useWatchLaterMovies } from '../hooks/useWatchLaterMovies';
-import styles from '../styles/movie-grid.module.scss';
 import '../styles/starred.scss';
 
 export const WatchLater = () => {
@@ -12,12 +11,7 @@ export const WatchLater = () => {
       {watchLaterMovies.length > 0 && (
         <div data-testid="watch-later-movies" className="starred-movies">
           <h6 className="header">Watch Later List</h6>
-          <div className={styles.grid}>
-            {watchLaterMovies.map((movie) => (
-              <Movie key={movie.id} movie={movie} />
-            ))}
-          </div>
-
+          <MovieGrid movies={watchLaterMovies} />
           <footer className="text-center">
             <button className="btn btn-primary" onClick={clearWatchLater}>
               Empty list

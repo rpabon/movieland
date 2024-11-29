@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
-import { Movie } from './Movie';
+import { MovieGrid } from './MovieGrid';
 import { useStarredMovies } from '../hooks/useStarredMovies';
-import styles from '../styles/movie-grid.module.scss';
 import '../styles/starred.scss';
 
 export const Starred = () => {
@@ -12,12 +11,7 @@ export const Starred = () => {
       {starredMovies.length > 0 && (
         <div data-testid="starred-movies" className="starred-movies">
           <h6 className="header">Starred movies</h6>
-          <div className={styles.grid}>
-            {starredMovies.map((movie) => (
-              <Movie movie={movie} key={movie.id} />
-            ))}
-          </div>
-
+          <MovieGrid movies={starredMovies} />
           <footer className="text-center">
             <button className="btn btn-primary" onClick={clearStarredMovies}>
               Remove all starred
