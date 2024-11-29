@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Movies } from './components/Movies';
@@ -8,11 +7,7 @@ import { useMovies } from './hooks/useMovies';
 import './app.scss';
 
 const App = () => {
-  const { movies, getMovies, getMoviesFromSearchParams } = useMovies();
-
-  useEffect(() => {
-    getMoviesFromSearchParams();
-  }, []);
+  const { movies, lastMovieRef, getMovies } = useMovies();
 
   return (
     <div className="App">
@@ -20,7 +15,7 @@ const App = () => {
 
       <div className="container">
         <Routes>
-          <Route path="/" element={<Movies movies={movies} />} />
+          <Route path="/" element={<Movies movies={movies} lastElementRef={lastMovieRef} />} />
           <Route path="/starred" element={<Starred />} />
           <Route path="/watch-later" element={<WatchLater />} />
           <Route path="*" element={<h1 className="not-found">Page Not Found</h1>} />

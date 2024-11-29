@@ -1,64 +1,55 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { createSearchParams, useSearchParams } from 'react-router-dom';
-import { fetchMovies } from '@/data/moviesSlice';
+import { fetchMovies, clearMovies } from '@/data/moviesSlice';
 import { ENDPOINT_SEARCH, ENDPOINT_DISCOVER } from '@/constants';
+import { usePagination } from './usePagination';
 
 export const useMovies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [currentPage, setCurrentPage] = useState(1);
-  const moviesState = useSelector((state) => state.movies);
+  const { movies, totalPages } = useSelector((state) => state.movies);
   const dispatch = useDispatch();
 
-  const searchMovies = (query, page = 1) => {
-    const apiUrl = `${ENDPOINT_SEARCH}&query=${encodeURIComponent(query)}`;
+  const { page: pageState, lastElementRef } = usePagination(totalPages);
 
-    dispatch(fetchMovies({ apiUrl, page }));
-    setSearchParams(createSearchParams({ search: query, page: page.toString() }));
-    setCurrentPage(page);
-  };
+  const searchMovies = useCallback((query, page) => {
+    const url = new URL(ENDPOINT_SEARCH);
+    url.searchParams.set('query', query);
+    const apiUrl = url.toString();
 
-  const discoverMovies = (page = 1) => {
-    dispatch(fetchMovies({ apiUrl: ENDPOINT_DISCOVER, page }));
-    setSearchParams(createSearchParams({ page: page.toString() }));
-    setCurrentPage(page);
-  };
+    setSearchParams(createSearchParams({ search: query }));
+    return dispatch(fetchMovies({ apiUrl, page }));
+  }, []);
+
+  const discoverMovies = useCallback((page) => {
+    setSearchParams({});
+    return dispatch(fetchMovies({ apiUrl: ENDPOINT_DISCOVER, page }));
+  }, []);
 
   const getMovies = useCallback(
-    (searchTerm, page = 1) => {
+    (searchTerm = '', page = 1) => {
       const query = searchTerm?.trim();
+      if (page === 1) {
+        dispatch(clearMovies());
+      }
 
       if (query) {
-        searchMovies(query, page);
+        return searchMovies(query, page);
       } else {
-        discoverMovies(page);
+        return discoverMovies(page);
       }
     },
     [searchMovies, discoverMovies]
   );
 
-  const getMoviesFromSearchParams = () => {
+  useEffect(() => {
     const query = searchParams.get('search');
-    const page = parseInt(searchParams.get('page') || '1', 10);
-    getMovies(query, page);
-  };
-
-  const nextPage = () => {
-    getMovies(searchParams.get('search'), currentPage + 1);
-  };
-
-  const previousPage = () => {
-    if (currentPage > 1) {
-      getMovies(searchParams.get('search'), currentPage - 1);
-    }
-  };
+    getMovies(query, pageState);
+  }, [pageState, searchParams, getMovies]);
 
   return {
-    movies: moviesState.movies,
+    movies,
+    lastMovieRef: lastElementRef,
     getMovies,
-    getMoviesFromSearchParams,
-    currentPage,
-    nextPage,
-    previousPage,
   };
 };

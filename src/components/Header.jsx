@@ -32,7 +32,7 @@ export const Header = ({ getMovies }) => {
         </NavLink>
       </nav>
 
-      <SearchMoviesInput getMovies={getMovies} />
+      <SearchMoviesInput />
     </header>
   );
 };

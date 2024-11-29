@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { clearList } from './store.utils';
 
 export const fetchMovies = createAsyncThunk('fetch-movies', async ({ apiUrl, page = 1 }) => {
   const url = new URL(apiUrl);
@@ -13,15 +14,24 @@ export const moviesSlice = createSlice({
   initialState: {
     movies: [],
     fetchStatus: 'idle',
-    currentPage: 1,
     totalPages: 1,
   },
-  reducers: {},
+  reducers: {
+    clearMovies: (state) => {
+      state.movies = clearList();
+      state.totalPages = 1;
+      state.fetchStatus = 'idle';
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchMovies.fulfilled, (state, action) => {
-        state.movies = action.payload.results;
-        state.currentPage = action.payload.page;
+        const existingMovieIds = new Set(state.movies.map((movie) => movie.id));
+        const newUniqueMovies = action.payload.results.filter(
+          (movie) => !existingMovieIds.has(movie.id)
+        );
+
+        state.movies = [...state.movies, ...newUniqueMovies];
         state.totalPages = action.payload.total_pages;
         state.fetchStatus = 'success';
       })
@@ -34,4 +44,5 @@ export const moviesSlice = createSlice({
   },
 });
 
+export const { clearMovies } = moviesSlice.actions;
 export default moviesSlice;
