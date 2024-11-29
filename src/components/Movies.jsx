@@ -5,7 +5,7 @@ import '../styles/movies.scss';
 export const Movies = ({ movies }) => {
   return (
     <div className={styles.grid} data-testid="movies">
-      {movies.movies.results?.map((movie) => (
+      {movies.map((movie) => (
         <Movie movie={movie} key={movie.id} />
       ))}
     </div>
