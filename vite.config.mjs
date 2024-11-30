@@ -17,7 +17,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': resolve(__dirname, 'src'),
+      '@': resolve(__dirname, './src'),
     },
   },
   server: {
@@ -29,8 +29,14 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: './jest.setup.js',
+    setupFiles: ['./src/setupTests.jsx'],
     css: true,
+    coverage: {
+      reporter: ['text', 'json', 'html'],
+    },
+    include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+    exclude: ['node_modules', 'dist', '.idea', '.git', '.cache'],
+    threads: true,
   },
   css: {
     modules: {
