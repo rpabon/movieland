@@ -6,6 +6,10 @@ export const fetchMovies = createAsyncThunk('fetch-movies', async ({ apiUrl, pag
   url.searchParams.set('page', page.toString());
 
   const response = await fetch(url.toString());
+  if (!response.ok) {
+    throw new Error('Failed to fetch movies');
+  }
+
   return response.json();
 });
 
