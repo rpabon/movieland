@@ -1,35 +1,25 @@
+import js from '@eslint/js';
 import globals from 'globals';
-import pluginJs from '@eslint/js';
-import pluginReact from 'eslint-plugin-react';
-import pluginVitest from 'eslint-plugin-vitest';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import tseslint from 'typescript-eslint';
 
-/** @type {import('eslint').Linter.Config[]} */
-export default [
-  { files: ['**/*.{js,mjs,cjs,jsx}'] },
+export default tseslint.config(
+  { ignores: ['dist'] },
   {
+    extends: [js.configs.recommended, ...tseslint.configs.recommended],
+    files: ['**/*.{ts,tsx}'],
     languageOptions: {
-      globals: {
-        ...globals.browser,
-        ...globals.es2021,
-        ...pluginVitest.environments.env.globals,
-      },
+      ecmaVersion: 2020,
+      globals: globals.browser,
     },
-  },
-  pluginJs.configs.recommended,
-  pluginReact.configs.flat.recommended,
-  pluginVitest.configs['flat/recommended'],
-  {
+    plugins: {
+      'react-hooks': reactHooks,
+      'react-refresh': reactRefresh,
+    },
     rules: {
-      'react/react-in-jsx-scope': 'off',
-      'react/prop-types': 'off',
+      ...reactHooks.configs.recommended.rules,
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     },
-  },
-  {
-    files: ['**/*.test.{js,mjs,cjs,jsx}', '**/*.spec.{js,mjs,cjs,jsx}'],
-    rules: {
-      'vitest/expect-expect': 'error',
-      'vitest/no-disabled-tests': 'warn',
-      'vitest/no-focused-tests': 'error',
-    },
-  },
-];
+  }
+);
