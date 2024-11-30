@@ -1,10 +1,15 @@
-import { StarButton } from './StarButton';
-import { WatchLaterButton } from './WatchLaterButton';
-import { ViewTrailerButton } from './ViewTrailerButton';
-import { useStarredMovies } from '../hooks/useStarredMovies';
-import { useWatchLaterMovies } from '../hooks/useWatchLaterMovies';
+import { StarButton } from '@/components/StarButton';
+import { WatchLaterButton } from '@/components/WatchLaterButton';
+import { ViewTrailerButton } from '@/components/ViewTrailerButton';
+import { useStarredMovies } from '@/hooks/useStarredMovies';
+import { useWatchLaterMovies } from '@/hooks/useWatchLaterMovies';
+import { MovieType } from '@/types/MovieType';
 
-export const MovieInfoPanel = ({ movie }) => {
+type Props = {
+  movie: MovieType;
+};
+
+export const MovieInfoPanel = ({ movie }: Props) => {
   const { isStarred, toggleStar } = useStarredMovies();
   const { isWatchLater, toggleWatchLater } = useWatchLaterMovies();
 

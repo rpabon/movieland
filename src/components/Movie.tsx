@@ -1,10 +1,15 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 import cx from 'classnames';
 import placeholder from '@/assets/not-found-500X750.jpeg';
-import { MovieInfoPanel } from './MovieInfoPanel';
+import { MovieInfoPanel } from '@/components/MovieInfoPanel';
+import { MovieType } from '@/types/MovieType';
 import styles from '../styles/movie.module.scss';
 
-export const Movie = forwardRef(({ movie }, ref) => {
+type Props = {
+  movie: MovieType;
+};
+
+export const Movie = forwardRef<HTMLDivElement, Props>(({ movie }, ref) => {
   const poster = movie.poster_path
     ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
     : placeholder;

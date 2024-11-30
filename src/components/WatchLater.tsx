@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-import { MovieGrid } from './MovieGrid';
-import { useWatchLaterMovies } from '../hooks/useWatchLaterMovies';
-import '../styles/starred.scss';
+import { MovieGrid } from '@/components/MovieGrid';
+import { useWatchLaterMovies } from '@/hooks/useWatchLaterMovies';
+import '@/styles/starred.scss';
 
 export const WatchLater = () => {
-  const { watchLaterMovies, clearWatchLater } = useWatchLaterMovies();
+  const { watchLaterMovies, clearWatchLaterList } = useWatchLaterMovies();
 
   return (
     <div className="starred" data-testid="watch-later-div">
@@ -13,7 +13,7 @@ export const WatchLater = () => {
           <h6 className="header">Watch Later List</h6>
           <MovieGrid movies={watchLaterMovies} />
           <footer className="text-center">
-            <button className="btn btn-primary" onClick={clearWatchLater}>
+            <button className="btn btn-primary" onClick={clearWatchLaterList}>
               Empty list
             </button>
           </footer>

@@ -8,7 +8,7 @@ export const useSelectedMovie = () => {
     (state) => state.selectedMovie
   );
 
-  const getSingleMovie = (movieId: string) => {
+  const getSingleMovie = (movieId: number) => {
     dispatch(fetchSelectedMovie(movieId));
   };
 

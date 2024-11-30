@@ -1,10 +1,10 @@
 import { Routes, Route } from 'react-router-dom';
-import { Header } from './components/Header';
-import { YoutubePlayer } from './components/YoutubePlayer';
-import { Movies } from './components/Movies';
-import { Starred } from './components/Starred';
-import { WatchLater } from './components/WatchLater';
-import './app.scss';
+import { Header } from '@/components/Header';
+import { YoutubePlayer } from '@/components/YoutubePlayer';
+import { Movies } from '@/components/Movies';
+import { Starred } from '@/components/Starred';
+import { WatchLater } from '@/components/WatchLater';
+import '@/app.scss';
 
 const App = () => {
   return (

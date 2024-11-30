@@ -1,9 +1,15 @@
-import React from 'react';
+import { ReactNode } from 'react';
 import ReactDOM from 'react-dom';
 import cx from 'classnames';
 
-export const Modal = ({ isOpen, onClose, children }) => {
-  const onBackdropClick = (e) => {
+type Props = {
+  isOpen: boolean;
+  children: ReactNode;
+  onClose: () => void;
+};
+
+export const Modal = ({ isOpen, onClose, children }: Props) => {
+  const onBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target !== e.currentTarget) return;
     onClose();
   };
@@ -18,7 +24,7 @@ export const Modal = ({ isOpen, onClose, children }) => {
         onClick={onBackdropClick}
       />
       <div
-        tabIndex="-1"
+        tabIndex={-1}
         role="dialog"
         className={cx('modal', 'fade', {
           'show d-block': isOpen,
@@ -41,6 +47,6 @@ export const Modal = ({ isOpen, onClose, children }) => {
         </div>
       </div>
     </>,
-    document.getElementById('modal')
+    document.getElementById('modal')!
   );
 };

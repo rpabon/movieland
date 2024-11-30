@@ -1,6 +1,10 @@
-import { useSelectedMovie } from '../hooks/useSelectedMovie';
+import { useSelectedMovie } from '@/hooks/useSelectedMovie';
 
-export const ViewTrailerButton = ({ movieId }) => {
+type Props = {
+  movieId: number;
+};
+
+export const ViewTrailerButton = ({ movieId }: Props) => {
   const { getSingleMovie } = useSelectedMovie();
   const onClick = () => getSingleMovie(movieId);
 

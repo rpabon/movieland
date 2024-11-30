@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import { MovieGrid } from './MovieGrid';
-import { useStarredMovies } from '../hooks/useStarredMovies';
-import '../styles/starred.scss';
+import { MovieGrid } from '@/components/MovieGrid';
+import { useStarredMovies } from '@/hooks/useStarredMovies';
+import '@/styles/starred.scss';
 
 export const Starred = () => {
   const { starredMovies, clearStarredMovies } = useStarredMovies();

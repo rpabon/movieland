@@ -1,31 +1,30 @@
-import { useCallback, useRef, useEffect } from 'react';
+import { useCallback, useRef, useEffect, RefCallback } from 'react';
 
 export const usePagination = (incrementPage: () => void) => {
-  const elementRef = useRef<IntersectionObserver | null>(null);
+  const observerRef = useRef<IntersectionObserver | null>(null);
 
-  const lastElementRef = useCallback(
-    (node: Element | null) => {
-      // Remove previous observer if exists and disconnect it
-      if (elementRef.current) elementRef.current.disconnect();
+  const lastElementRef: RefCallback<HTMLDivElement> = useCallback(
+    (node) => {
+      if (observerRef.current) observerRef.current.disconnect();
       if (!node) return;
 
-      elementRef.current = new IntersectionObserver((entries) => {
+      observerRef.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting) {
           incrementPage();
-          elementRef.current?.disconnect();
+          observerRef.current?.disconnect();
         }
       });
 
-      elementRef.current.observe(node);
+      observerRef.current.observe(node);
     },
     [incrementPage]
   );
 
-  // Cleanup function to disconnect the observer when the component unmounts
   useEffect(() => {
     return () => {
-      if (!elementRef.current) return;
-      elementRef.current.disconnect();
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
     };
   }, []);
 

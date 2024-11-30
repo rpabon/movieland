@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import ReactPlayer from 'react-player';
-import { Modal } from './Modal';
-import { useSelectedMovie } from '../hooks/useSelectedMovie';
-import styles from '../styles/youtubePlayer.module.scss';
+import { Modal } from '@/components/Modal';
+import { useSelectedMovie } from '@/hooks/useSelectedMovie';
+import styles from '@/styles/youtubePlayer.module.scss';
 
 export const YoutubePlayer = () => {
   const [isOpen, setIsOpen] = useState(false);

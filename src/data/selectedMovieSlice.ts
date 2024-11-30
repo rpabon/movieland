@@ -3,7 +3,7 @@ import { ENDPOINT, API_KEY } from '../constants';
 import { getTrailerKey } from './store.utils';
 import { MovieType } from '@/types/MovieType';
 
-export const fetchSelectedMovie = createAsyncThunk<MovieType, string>(
+export const fetchSelectedMovie = createAsyncThunk<MovieType, number>(
   'fetch-single-movie',
   async (movieId) => {
     const url = new URL(`${ENDPOINT}/movie/${movieId}`);

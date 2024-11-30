@@ -12,7 +12,7 @@ export const useMovies = () => {
   const { clearMovies, incrementPage } = movieSlice.actions;
 
   const searchMovies = useCallback(
-    (query: string, page: number) => {
+    (query: string, page?: number) => {
       const url = new URL(ENDPOINT_SEARCH);
       url.searchParams.set('query', query);
       const apiUrl = url.toString();
@@ -23,7 +23,7 @@ export const useMovies = () => {
   );
 
   const discoverMovies = useCallback(
-    (page: number) => {
+    (page?: number) => {
       return dispatch(fetchMovies({ apiUrl: ENDPOINT_DISCOVER, page }));
     },
     [dispatch]

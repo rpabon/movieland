@@ -1,13 +1,13 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import { useCallback, useState, useEffect, ChangeEvent } from 'react';
 import { createSearchParams, useSearchParams, useNavigate } from 'react-router-dom';
 import { debounce } from 'lodash';
-import { useMovies } from '../hooks/useMovies';
+import { useMovies } from '@/hooks/useMovies';
 
 const INPUT_DELAY = 500;
 
 export const SearchMoviesInput = () => {
   const [searchParams] = useSearchParams();
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState<string>('');
   const { clearMovies } = useMovies();
   const navigate = useNavigate();
 
@@ -17,16 +17,23 @@ export const SearchMoviesInput = () => {
   }, [searchParams]);
 
   const debouncedSearchMovies = useCallback(
-    debounce((searchTerm) => {
-      clearMovies();
+    (searchTerm: string) => {
+      const search = debounce(() => {
+        clearMovies();
+        const searchParams = searchTerm.trim()
+          ? `?${createSearchParams({ search: searchTerm })}`
+          : '';
+        navigate(`/${searchParams}`, { replace: true });
+      }, INPUT_DELAY);
 
-      const search = searchTerm.trim() ? `?${createSearchParams({ search: searchTerm })}` : '';
-      navigate(`/${search}`, { replace: true });
-    }, INPUT_DELAY),
-    [navigate, clearMovies]
+      search();
+
+      return () => search.cancel();
+    },
+    [clearMovies, navigate]
   );
 
-  const searchMovies = (e) => {
+  const searchMovies = (e: ChangeEvent<HTMLInputElement>) => {
     const searchTerm = e.target.value;
     setInputValue(searchTerm);
     debouncedSearchMovies(searchTerm);
