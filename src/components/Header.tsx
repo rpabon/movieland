@@ -1,8 +1,8 @@
 import { Link, NavLink } from 'react-router-dom';
 import { SearchMoviesInput } from '@/components/SearchMoviesInput';
-import { useMovies } from '../hooks/useMovies';
-import { useStarredMovies } from '../hooks/useStarredMovies';
-import '../styles/header.scss';
+import { useMovies } from '@/hooks/useMovies';
+import { useStarredMovies } from '@/hooks/useStarredMovies';
+import '@/styles/header.scss';
 
 export const Header = () => {
   const { discoverMovies, clearMovies } = useMovies();

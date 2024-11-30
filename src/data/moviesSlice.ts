@@ -68,7 +68,7 @@ interface FetchMoviesParams {
   page?: number;
 }
 
-interface MoviesState {
+export interface MoviesState {
   movies: MovieType[];
   fetchStatus: 'idle' | 'loading' | 'success' | 'error';
   currentPage: number;

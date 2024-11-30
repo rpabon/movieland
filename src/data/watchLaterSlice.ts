@@ -22,7 +22,7 @@ const watchLaterSlice = createSlice({
   },
 });
 
-interface WatchLaterState {
+export interface WatchLaterState {
   watchLaterMovies: MovieType[];
 }
 

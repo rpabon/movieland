@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { usePagination } from './usePagination';
-import { useMovies } from './useMovies';
+import { usePagination } from '@/hooks/usePagination';
+import { useMovies } from '@/hooks/useMovies';
 
 export const usePaginatedMovies = () => {
   const [searchParams] = useSearchParams();

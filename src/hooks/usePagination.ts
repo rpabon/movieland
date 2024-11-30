@@ -1,10 +1,10 @@
 import { useCallback, useRef, useEffect } from 'react';
 
-export const usePagination = (incrementPage) => {
-  const elementRef = useRef(null);
+export const usePagination = (incrementPage: () => void) => {
+  const elementRef = useRef<IntersectionObserver | null>(null);
 
   const lastElementRef = useCallback(
-    (node) => {
+    (node: Element | null) => {
       // Remove previous observer if exists and disconnect it
       if (elementRef.current) elementRef.current.disconnect();
       if (!node) return;
@@ -12,7 +12,7 @@ export const usePagination = (incrementPage) => {
       elementRef.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting) {
           incrementPage();
-          elementRef.current.disconnect();
+          elementRef.current?.disconnect();
         }
       });
 

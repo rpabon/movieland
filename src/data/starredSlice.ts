@@ -22,7 +22,7 @@ const starredSlice = createSlice({
   },
 });
 
-interface StarredState {
+export interface StarredState {
   starredMovies: MovieType[];
 }
 

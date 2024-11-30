@@ -48,7 +48,7 @@ const selectedMovieSlice = createSlice({
   },
 });
 
-interface SelectedMovieState {
+export interface SelectedMovieState {
   movie: MovieType | null;
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
