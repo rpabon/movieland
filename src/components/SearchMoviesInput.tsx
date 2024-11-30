@@ -3,11 +3,11 @@ import { createSearchParams, useSearchParams, useNavigate } from 'react-router-d
 import { debounce } from 'lodash';
 import { useMovies } from '@/hooks/useMovies';
 
-const INPUT_DELAY = 500;
+const INPUT_DELAY = 700;
 
 export const SearchMoviesInput = () => {
   const [searchParams] = useSearchParams();
-  const [inputValue, setInputValue] = useState<string>('');
+  const [inputValue, setInputValue] = useState('');
   const { clearMovies } = useMovies();
   const navigate = useNavigate();
 
@@ -16,21 +16,15 @@ export const SearchMoviesInput = () => {
     setInputValue(queryParam);
   }, [searchParams]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedSearchMovies = useCallback(
-    (searchTerm: string) => {
-      const search = debounce(() => {
-        clearMovies();
-        const searchParams = searchTerm.trim()
-          ? `?${createSearchParams({ search: searchTerm })}`
-          : '';
-        navigate(`/${searchParams}`, { replace: true });
-      }, INPUT_DELAY);
+    debounce((searchTerm: string) => {
+      clearMovies();
 
-      search();
-
-      return () => search.cancel();
-    },
-    [clearMovies, navigate]
+      const search = searchTerm.trim() ? `?${createSearchParams({ search: searchTerm })}` : '';
+      navigate(`/${search}`, { replace: true });
+    }, INPUT_DELAY),
+    [navigate, clearMovies]
   );
 
   const searchMovies = (e: ChangeEvent<HTMLInputElement>) => {
