@@ -1,12 +1,14 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { createSearchParams, useSearchParams, useNavigate } from 'react-router-dom';
 import { debounce } from 'lodash';
+import { useMovies } from '../hooks/useMovies';
 
 const INPUT_DELAY = 500;
 
 export const SearchMoviesInput = () => {
   const [searchParams] = useSearchParams();
   const [inputValue, setInputValue] = useState('');
+  const { clearMovies } = useMovies();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,10 +18,12 @@ export const SearchMoviesInput = () => {
 
   const debouncedSearchMovies = useCallback(
     debounce((searchTerm) => {
+      clearMovies();
+
       const search = searchTerm.trim() ? `?${createSearchParams({ search: searchTerm })}` : '';
       navigate(`/${search}`, { replace: true });
     }, INPUT_DELAY),
-    [navigate]
+    [navigate, clearMovies]
   );
 
   const searchMovies = (e) => {

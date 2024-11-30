@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addToList, removeFromList, clearList } from './store.utils';
+import { addToList, removeFromList } from './store.utils';
 
 const watchLaterSlice = createSlice({
   name: 'watch-later',
@@ -14,7 +14,7 @@ const watchLaterSlice = createSlice({
       state.watchLaterMovies = removeFromList(state.watchLaterMovies, action.payload);
     },
     removeAllWatchLater: (state) => {
-      state.watchLaterMovies = clearList();
+      state.watchLaterMovies = [];
     },
   },
 });

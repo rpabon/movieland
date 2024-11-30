@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addToList, removeFromList, clearList } from './store.utils';
+import { addToList, removeFromList } from './store.utils';
 
 const starredSlice = createSlice({
   name: 'starred',
@@ -14,7 +14,7 @@ const starredSlice = createSlice({
       state.starredMovies = removeFromList(state.starredMovies, action.payload);
     },
     clearAllStarred: (state) => {
-      state.starredMovies = clearList();
+      state.starredMovies = [];
     },
   },
 });

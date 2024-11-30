@@ -9,8 +9,6 @@ export const removeFromList = (list, itemToRemove) => {
   return list.filter(({ id }) => id !== itemToRemove.id);
 };
 
-export const clearList = () => [];
-
 export const getTrailerKey = (movie) => {
   if (!movie?.videos?.results) return null;
 
