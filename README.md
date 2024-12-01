@@ -1,4 +1,4 @@
-# Movieland
+# Movieland by Ricardo Pabón
 
 ## Code Review and Refactoring
 
