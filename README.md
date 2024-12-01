@@ -1,8 +1,17 @@
-# Movieland 
+# Movieland
 
-React + Redux + RTK + Bootstrap application that fetches movies from [https://www.themoviedb.org/](https://www.themoviedb.org/)
+## Code Review and Refactoring
 
-Created with [Create React App](https://github.com/facebook/create-react-app).
+The original version of this project underwent a code review, which can be found in this [Pull Request](https://github.com/rpabon/movieland/pull/2).
+
+**Note:** The master branch has been refactored and improved to include:
+
+- Fixed features and code refactored following clean code practices
+- Vite for faster build times and improved development experience
+- TypeScript for enhanced type safety and developer productivity
+- CSS Modules for better CSS encapsulation and maintainability
+
+These changes have significantly improved the project structure and development workflow.
 
 ## Available Scripts
 
