@@ -5,6 +5,7 @@ import placeholder from '../assets/not-found-500X750.jpeg'
 
 // Prop closeCard is not being used. Remove it if not needed.
 const Movie = ({ movie, viewTrailer, closeCard }) => {
+
     // Consider moving the state logic into a custom hook.
     const state = useSelector((state) => state)
     const { starred, watchLater } = state

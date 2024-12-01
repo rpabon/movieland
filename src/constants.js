@@ -1,4 +1,6 @@
-// I would suggest using string interpolation to buld the endpoint URLs
+/**
+ * I would suggest using string interpolation to buld the endpoint URLs
+ */
 
 // Consider placing the Api key in a separate env file for better security
 export const API_KEY = '8cac6dec66e09ab439c081b251304443'

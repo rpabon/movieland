@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import '../styles/header.scss'
 
 const Header = ({ searchMovies }) => {
+
   /**
    * Creating custom hooks as a facade to expose the store state
    * to avoid direct access to the store and provide better maintainability.
