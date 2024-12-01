@@ -17,6 +17,10 @@
     "reactjs-popup": "^2.0.5",
     "web-vitals": "^2.1.4"
   },
+  "note_on_dependencies": [
+    "There seems to be a conflict with the node-sass and this version of react-scripts.",
+    "By downgrading node-sass to v7, the issue should be resolved."
+  ],
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

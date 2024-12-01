@@ -6,6 +6,7 @@ import '../styles/starred.scss'
 
 const WatchLater = ({viewTrailer}) => {
 
+    // Consider moving the state logic into a custom hook.
     const state = useSelector((state) => state)
     const { watchLater } = state
     const { remveAllWatchLater } = watchLaterSlice.actions
@@ -16,6 +17,7 @@ const WatchLater = ({viewTrailer}) => {
       {watchLater.watchLaterMovies.length > 0 && (<div data-testid="watch-later-movies" className="starred-movies">
         <h6 className="header">Watch Later List</h6>
         <div className="row">
+        {/* There is a component, Movies, that renders a list of movies. Could we implement it here? */}
         {watchLater.watchLaterMovies.map((movie) => (
           <Movie 
             movie={movie} 

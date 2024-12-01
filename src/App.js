@@ -12,7 +12,10 @@ import YouTubePlayer from './components/YoutubePlayer'
 import './app.scss'
 
 const App = () => {
-
+  /**
+   * Consider packing all this logic in a custom hook,
+   * or in multiple ones, each one with common logic.
+   */
   const state = useSelector((state) => state)
   const { movies } = state  
   const dispatch = useDispatch()
@@ -22,8 +25,10 @@ const App = () => {
   const [isOpen, setOpen] = useState(false)
   const navigate = useNavigate()
   
+  // This function is not beign used here. Please remove unused code.
   const closeModal = () => setOpen(false)
   
+  // This function is passed to a component. Functionality should be implemented or the function removed.
   const closeCard = () => {
 
   }
@@ -53,14 +58,21 @@ const App = () => {
 
   const viewTrailer = (movie) => {
     getMovie(movie.id)
+    // This condition is redundat, setOpen will always be called with the same arg.
     if (!videoKey) setOpen(true)
     setOpen(true)
   }
 
+  /**
+    * Even thouh tis function is called only here, it would help to have
+    * a store slice for a single selected movie, to be able to use its data
+    * in any given place in the app.
+    */
   const getMovie = async (id) => {
     const URL = `${ENDPOINT}/movie/${id}?api_key=${API_KEY}&append_to_response=videos`
 
     setVideoKey(null)
+    // Consider placing the fetch call in a try/catch block to handle any errors that may occur.
     const videoData = await fetch(URL)
       .then((response) => response.json())
 
@@ -71,6 +83,10 @@ const App = () => {
   }
 
   useEffect(() => {
+    /**
+      * It'd be better to include the logic of getMovies inside this useEffect
+      * and all its dependencies in the dep array.
+      */
     getMovies()
   }, [])
 
