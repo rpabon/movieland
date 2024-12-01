@@ -14,7 +14,7 @@ const Movie = ({ movie, viewTrailer, closeCard }) => {
     const dispatch = useDispatch()
 
     /**
-     * The function name doesn't provide a hint of what it does and the contet
+     * The function name doesn't provide a hint of what it does and the content
      * is confusing. If what it does is to toggle a className, consider using
      * a useState hook to handle the css class and update it on an event.
      */

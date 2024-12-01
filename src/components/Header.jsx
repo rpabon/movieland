@@ -6,7 +6,7 @@ import '../styles/header.scss'
 const Header = ({ searchMovies }) => {
   /**
    * Creating custom hooks as a facade to expose the store state
-   * to avoid direct access to the store and provide better maintainability
+   * to avoid direct access to the store and provide better maintainability.
    */
   const { starredMovies } = useSelector((state) => state.starred)
 

@@ -12,6 +12,7 @@ import YouTubePlayer from './components/YoutubePlayer'
 import './app.scss'
 
 const App = () => {
+
   /**
    * Consider packing all this logic in a custom hook,
    * or in multiple ones, each one with common logic.
@@ -58,13 +59,13 @@ const App = () => {
 
   const viewTrailer = (movie) => {
     getMovie(movie.id)
-    // This condition is redundat, setOpen will always be called with the same arg.
+    // This condition is redundant, setOpen will always be called with the same arg.
     if (!videoKey) setOpen(true)
     setOpen(true)
   }
 
   /**
-    * Even thouh tis function is called only here, it would help to have
+    * Even though this function is called only here, it would help to have
     * a store slice for a single selected movie, to be able to use its data
     * in any given place in the app.
     */
