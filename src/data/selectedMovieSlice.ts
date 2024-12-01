@@ -24,12 +24,26 @@ const initialState: SelectedMovieState = {
   status: 'idle',
   error: null,
   trailerKey: null,
+  isModalOpen: false,
 };
 
 const selectedMovieSlice = createSlice({
   name: 'selectedMovie',
   initialState,
-  reducers: {},
+  reducers: {
+    openModal: (state) => {
+      state.isModalOpen = true;
+    },
+    closeModal: (state) => {
+      state.isModalOpen = false;
+    },
+    clearSelectedMovie: (state) => {
+      state.movie = null;
+      state.status = 'idle';
+      state.error = null;
+      state.trailerKey = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchSelectedMovie.pending, (state) => {
@@ -53,6 +67,7 @@ export interface SelectedMovieState {
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
   trailerKey: string | null;
+  isModalOpen: boolean;
 }
 
 export default selectedMovieSlice;

@@ -5,8 +5,8 @@ type Props = {
 };
 
 export const ViewTrailerButton = ({ movieId }: Props) => {
-  const { getSingleMovie } = useSelectedMovie();
-  const onClick = () => getSingleMovie(movieId);
+  const { openMovieTrailerModal } = useSelectedMovie();
+  const onClick = () => openMovieTrailerModal(movieId);
 
   return (
     <button type="button" className="btn btn-dark" onClick={onClick}>

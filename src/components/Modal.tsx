@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import ReactDOM from 'react-dom';
 import cx from 'classnames';
+import styles from '@/styles/modal.module.scss';
 
 type Props = {
   isOpen: boolean;
@@ -33,7 +34,7 @@ export const Modal = ({ isOpen, onClose, children }: Props) => {
         onClick={onBackdropClick}
       >
         <div className="modal-dialog modal-dialog-centered modal-xl" role="document">
-          <div className="modal-content bg-dark text-light">
+          <div className={cx('modal-content text-light', styles.modalContent)}>
             <div className="modal-header border-0">
               <button
                 type="button"

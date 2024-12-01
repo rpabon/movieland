@@ -1,30 +1,19 @@
-import { useState, useEffect } from 'react';
 import ReactPlayer from 'react-player';
 import { Modal } from '@/components/Modal';
 import { useSelectedMovie } from '@/hooks/useSelectedMovie';
 import styles from '@/styles/youtubePlayer.module.scss';
 
 export const YoutubePlayer = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const { trailerKey } = useSelectedMovie();
-  const url = `https://www.youtube.com/watch?v=${trailerKey}`;
-
-  useEffect(() => {
-    setIsOpen(!!trailerKey);
-  }, [trailerKey]);
-
-  const onClose = () => {
-    setIsOpen(false);
-  };
+  const { trailerUrl, isModalOpen, closeMovieTrailerModal } = useSelectedMovie();
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isModalOpen} onClose={closeMovieTrailerModal}>
       <div className={styles.wrapper}>
         <ReactPlayer
           data-testid="youtube-player"
           className={styles.player}
-          url={url}
-          playing={isOpen}
+          url={trailerUrl}
+          playing
           width="100%"
           height="100%"
           controls

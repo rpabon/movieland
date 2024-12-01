@@ -1,22 +1,36 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchSelectedMovie, SelectedMovieState } from '@/data/selectedMovieSlice';
 import { RootState, AppDispatch } from '@/data/store';
+import selectedMovieSlice, {
+  fetchSelectedMovie,
+  SelectedMovieState,
+} from '@/data/selectedMovieSlice';
 
 export const useSelectedMovie = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { movie, status, error, trailerKey } = useSelector<RootState, SelectedMovieState>(
-    (state) => state.selectedMovie
-  );
+  const { openModal, closeModal, clearSelectedMovie } = selectedMovieSlice.actions;
+  const { movie, status, error, trailerKey, isModalOpen } = useSelector<
+    RootState,
+    SelectedMovieState
+  >((state) => state.selectedMovie);
+  const trailerUrl = `https://www.youtube.com/watch?v=${trailerKey}`;
 
-  const getSingleMovie = (movieId: number) => {
+  const openMovieTrailerModal = (movieId: number) => {
     dispatch(fetchSelectedMovie(movieId));
+    dispatch(openModal());
+  };
+
+  const closeMovieTrailerModal = () => {
+    dispatch(closeModal());
+    dispatch(clearSelectedMovie());
   };
 
   return {
     movie,
     status,
     error,
-    trailerKey,
-    getSingleMovie,
+    trailerUrl,
+    isModalOpen,
+    openMovieTrailerModal,
+    closeMovieTrailerModal,
   };
 };
