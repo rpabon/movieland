@@ -1,3 +1,7 @@
+/** 
+* It might be easier to maintain if we get rid of so much class nesting.
+* Consider implementing BEM or css modules to keep the specificity low.
+*/
 .container {
     padding-top: 100px;
     color: #fff;
@@ -16,9 +20,14 @@
         margin-bottom: 2rem;
     }
 
+    /** 
+    * Setting a transition in every children element is not optimal,
+    * consider applying it with a single class where needed.
+    */
     .card, 
     .card *,
     .card + * {
+        // Instead of transitioning all, better transition just the required property
         -webkit-transition: all .2s ease-in-out;
         -moz-transition: all .2s ease-in-out;
         -ms-transition: all .2s ease-in-out;
