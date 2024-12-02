@@ -14,6 +14,12 @@ const moviesSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(fetchMovies.fulfilled, (state, action) => {
+            /**
+             * The movies are replaced on each API call, this might be
+             * a potential issue with pagination. A better approach could be
+             * adding unique movies to an array and clearing it with a
+             * clearMovies action when needed.
+             */
             state.movies = action.payload
             state.fetchStatus = 'success'
         }).addCase(fetchMovies.pending, (state) => {

@@ -5,6 +5,10 @@ const starredSlice = createSlice({
     initialState: {
         starredMovies: []
     },
+    /**
+     * There is common logic in these redicers and those in watchLaterSlice.js
+     * Consider placing them in a store utils file.
+     */
     reducers: {
         starMovie: (state, action) => {
             state.starredMovies = [action.payload, ...state.starredMovies]

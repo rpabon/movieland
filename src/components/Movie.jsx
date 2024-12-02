@@ -3,8 +3,10 @@ import starredSlice from '../data/starredSlice'
 import watchLaterSlice from '../data/watchLaterSlice'
 import placeholder from '../assets/not-found-500X750.jpeg'
 
+// Prop closeCard is not being used. Remove it if not needed.
 const Movie = ({ movie, viewTrailer, closeCard }) => {
 
+    // Consider moving the state logic into a custom hook.
     const state = useSelector((state) => state)
     const { starred, watchLater } = state
     const { starMovie, unstarMovie } = starredSlice.actions
@@ -12,6 +14,11 @@ const Movie = ({ movie, viewTrailer, closeCard }) => {
 
     const dispatch = useDispatch()
 
+    /**
+     * The function name doesn't provide a hint of what it does and the content
+     * is confusing. If what it does is to toggle a className, consider using
+     * a useState hook to handle the css class and update it on an event.
+     */
     const myClickHandler = (e) => {
         if (!e) var e = window.event
         e.cancelBubble = true
@@ -27,6 +34,7 @@ const Movie = ({ movie, viewTrailer, closeCard }) => {
                 <div className="info_panel">
                     <div className="overview">{movie.overview}</div>
                     <div className="year">{movie.release_date?.substring(0, 4)}</div>
+                    {/* Consider moving this block to its own conmponent file. */}
                     {!starred.starredMovies.map(movie => movie.id).includes(movie.id) ? (
                         <span className="btn-star" data-testid="starred-link" onClick={() => 
                             dispatch(starMovie({
@@ -44,6 +52,7 @@ const Movie = ({ movie, viewTrailer, closeCard }) => {
                             <i className="bi bi-star-fill" data-testid="star-fill" />
                         </span>
                     )}
+                    {/* Consider moving this block to its own conmponent file. */}
                     {!watchLater.watchLaterMovies.map(movie => movie.id).includes(movie.id) ? (
                         <button type="button" data-testid="watch-later" className="btn btn-light btn-watch-later" onClick={() => dispatch(addToWatchLater({
                                 id: movie.id, 
@@ -61,6 +70,7 @@ const Movie = ({ movie, viewTrailer, closeCard }) => {
             </div>
             <h6 className="title mobile-card">{movie.title}</h6>
             <h6 className="title">{movie.title}</h6>
+            {/* It's not clear what this closes. Maybe a modal that is not yet implmented? */}
             <button type="button" className="close" onClick={(e) => myClickHandler(e)} aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
