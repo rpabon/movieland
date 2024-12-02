@@ -2,7 +2,7 @@
 
 ## Code Review and Refactoring
 
-The original version of this project underwent a code review, which can be found in this [Pull Request](https://github.com/rpabon/movieland/pull/2).
+The original version of this project underwent a code review, which can be found in this [Pull Request](https://github.com/rpabon/movieland/pull/2/files).
 
 **Note:** The master branch has been refactored and improved to include:
 
